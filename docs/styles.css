@@ -1,0 +1,12 @@
+body {
+	font-family: 'Noto Serif', serif;
+	background-color: #ebebe4;
+	padding-left: 20%;
+	padding-right: 20%;
+}
+
+a {
+	background-color: #dbe7ce;
+	text-decoration-line: none;
+	color: darkslategray;
+}
