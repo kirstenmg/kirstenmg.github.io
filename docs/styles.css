@@ -18,3 +18,24 @@ a {
 	text-decoration-line: none;
 	color: #2a4635;
 }
+
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: #302d2c;
+		color: #caccc5;
+	}
+
+	h1 {
+		color: #caccc5;
+	}
+
+	a {
+		background-color: #3c4f44;
+		color: #caccc5;
+	}
+
+	body {
+		letter-spacing: 0.55px;
+		line-height: 1.5;
+	}
+}
