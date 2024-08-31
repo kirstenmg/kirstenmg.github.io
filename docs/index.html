@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <head>
 	<title>Kirsten Graham</title>
     <link rel="stylesheet" href="./styles.css">
@@ -6,6 +7,34 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+// :)
+var keyQueue = [];
+var keySequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+
+function success() {
+	if (keyQueue.length != keySequence.length) {return false;}
+
+	for (let i = 0; i < keyQueue.length; i++) {
+		if (keyQueue[i] !== keySequence[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+document.addEventListener('keydown', function(e) {
+	keyQueue.push(e.keyCode);
+	if (keyQueue.length > 10) {
+		keyQueue.shift();
+	}
+
+	if (success()) {
+		window.location.href = "goose.pdf";
+	}
+});
+
+</script>
 </head>
 
 <body style="display: flex;">
