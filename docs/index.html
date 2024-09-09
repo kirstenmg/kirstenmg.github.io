@@ -1,53 +1,113 @@
 <!DOCTYPE html>
+
 <head>
 	<title>Kirsten Graham</title>
-    <link rel="stylesheet" href="./styles.css">
+	<link rel="stylesheet" href="./styles.css">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script>
-// :)
-var keyQueue = [];
-var keySequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-function success() {
-	if (keyQueue.length != keySequence.length) {return false;}
+	<script>
+		// function setTheme(theme) {
+		// 	document.body.classList.remove('dark-mode', 'party-time');
+		// 	if (theme !== 'light') {
+		// 		document.body.classList.add(theme + '-mode');
+		// 	}
+		// }
 
-	for (let i = 0; i < keyQueue.length; i++) {
-		if (keyQueue[i] !== keySequence[i]) {
-			return false;
+		// // Check system preference on load
+		// if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+		// 	setTheme('dark');
+		// }
+
+		// // Listen for changes in system preference
+		// window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+		// 	setTheme(event.matches ? 'dark' : 'light');
+		// });
+
+
+		var keyQueue = [];
+		var keySequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+
+		function success() {
+			if (keyQueue.length != keySequence.length) { return false; }
+
+			for (let i = 0; i < keyQueue.length; i++) {
+				if (keyQueue[i] !== keySequence[i]) {
+					return false;
+				}
+			}
+			return true;
 		}
-	}
-	return true;
-}
 
-document.addEventListener('keydown', function(e) {
-	keyQueue.push(e.keyCode);
-	if (keyQueue.length > 10) {
-		keyQueue.shift();
-	}
+		document.addEventListener('keydown', function (e) {
+			keyQueue.push(e.keyCode);
+			if (keyQueue.length > 10) {
+				keyQueue.shift();
+			}
 
-	if (success()) {
-		window.location.href = "goose.pdf";
-	}
-});
+			if (success()) {
+				if (confirm("you have unlocked party mode. will you accept the responsibility?")) {
+					document.body.classList.remove("plain");
+					document.body.classList.add("party-time");
+					document.body.style.backgroundColor = "#f2f2f1";
+					document.body.style.color = "black";
+					for (const el of document.getElementsByClassName('party-exclusive'))
+						el.style.visibility = "visible";
 
-</script>
+					updateText();
+				}
+			}
+		});
+
+		// based on https://codepen.io/zachkrall/pen/MWWGMPx
+		var colors = ["#81ac6e", "#dd7e6b", "#bfb23f", "#c73810", "#e74e3c", "#20513e"]
+		function updateText() {
+
+			let delay = 200;
+
+			let h1 = document.getElementById("animated");
+			let text = h1.innerText
+
+			h1.innerHTML = text
+				.split("")
+				.map(letter => {
+					return `<span>` + letter + `</span>`;
+				})
+				.join("");
+
+			Array.from(h1.children).forEach((span, index) => {
+				span.style.color = colors[index % colors.length];
+				setTimeout(() => {
+					span.classList.add("wavy");
+				}, index * 70 + delay);
+			});
+
+		}
+
+
+	</script>
 </head>
 
-<body style="display: flex;">
+<body class="plain">
 	<div id="main">
-	<h1 style="margin: 0;">Kirsten Graham</h1>
-	<p style="margin: 0; font-style: italic;">she/her/hers</p>
-	<h3>M.S. Computer Science, University of Washington</h3>
+		<h1 id="animated">Kirsten Graham</h1>
+		<p>she/her/hers</p>
+		<h3>M.S. Computer Science, University of Washington</h3>
 
+		<p>
+			I am a Master's student at the University of Washington studying computer science, with an interest in
+			database systems and compilers.
+			My current research, at <a href="https://uwplse.org/">UW PLSE</a>, is on using equality saturation to build
+			an optimizing compiler.
+			In my free time, I enjoy digging in the dirt with <a href="https://sites.uw.edu/seruw/">SER-UW</a>.
+		</p>
 
-	<p>
-	I am a Master's student at the University of Washington studying computer science, with an interest in database systems and compilers. 
-	My current research, at <a href="https://uwplse.org/">UW PLSE</a>, is on using equality saturation to build an optimizing compiler.
-	In my free time, I enjoy digging in the dirt with <a href="https://sites.uw.edu/seruw/">SER-UW</a>. 
-	</p>
-</div>
+		<a href="goose.pdf" style="visibility: hidden; background-color: inherit;" class="party-exclusive">
+			<img src="goose.png" height="50px">
+		</a>
+
+	</div>
 </body>

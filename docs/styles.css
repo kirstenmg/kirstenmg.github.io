@@ -1,11 +1,6 @@
 body {
-	background-color: #f2f2f1;
-	/* display: flex; */
+	display: flex;
 	justify-content: center;
-}
-
-h1 {
-	padding-top: 20px;
 }
 
 #main {
@@ -13,29 +8,85 @@ h1 {
 	max-width: 600px;
 }
 
-a {
-	background-color: #dbe7ce;
-	text-decoration-line: none;
-	color: #2a4635;
-}
+.plain {
 
-@media (prefers-color-scheme: dark) {
 	body {
-		background-color: #302d2c;
-		color: #caccc5;
+		background-color: #f2f2f1;
 	}
 
 	h1 {
-		color: #caccc5;
+		padding-top: 20px;
 	}
 
 	a {
-		background-color: #3c4f44;
-		color: #caccc5;
+		background-color: #dbe7ce;
+		text-decoration-line: none;
+		color: #2a4635;
 	}
+}
 
+@media (prefers-color-scheme: dark) {
+	:not(.party-time) {
+		body {
+			background-color: #302d2c;
+			color: #caccc5;
+		}
+
+		h1 {
+			color: #caccc5;
+		}
+
+		a {
+			background-color: #3c4f44;
+			color: #caccc5;
+		}
+
+		body {
+			letter-spacing: 0.55px;
+			line-height: 1.5;
+		}
+	}
+}
+
+.party-time {
 	body {
 		letter-spacing: 0.55px;
 		line-height: 1.5;
+		color: #000000;
+	}
+
+	h1 {
+		padding-top: 20px;
+	}
+
+	a {
+		background-color: #dbe7ce;
+		text-decoration-line: none;
+		color: #2a4635;
+	}
+}
+
+
+.wavy {
+	animation-name: wavy;
+	animation-duration: 1.1s;
+	animation-timing-function: ease;
+	animation-iteration-count: infinite;
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+@keyframes wavy {
+	0% {
+		top: 0px;
+	}
+
+	50% {
+		top: -15px;
+	}
+
+	100% {
+		top: 0px;
 	}
 }
