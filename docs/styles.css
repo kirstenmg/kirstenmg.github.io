@@ -1,3 +1,7 @@
+:root {
+	--content-width: 600px;
+}
+
 body {
 	display: flex;
 	justify-content: center;
@@ -5,7 +9,7 @@ body {
 
 #main {
 	font-family: 'Noto Serif', serif;
-	max-width: 600px;
+	max-width: var(--content-width);
 }
 
 .plain {
@@ -88,5 +92,27 @@ body {
 
 	100% {
 		top: 0px;
+	}
+}
+
+#party-procession {
+	position: relative
+}
+
+.marquee {
+	position: absolute;
+	animation-name: marquee;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+@keyframes marquee {
+	from {
+		left: 0%;
+	}
+
+	to {
+		left: 90%;
 	}
 }
