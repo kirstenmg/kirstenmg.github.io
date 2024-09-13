@@ -5,6 +5,19 @@
 body {
 	display: flex;
 	justify-content: center;
+	letter-spacing: 0.55px;
+	line-height: 1.5;
+	background-color: #f2f2f1;
+}
+
+h1 {
+	padding-top: 20px;
+}
+
+a {
+	text-decoration-line: none;
+	background-color: #dbe7ce;
+	color: #2a4635;
 }
 
 #main {
@@ -12,52 +25,28 @@ body {
 	max-width: var(--content-width);
 }
 
-.plain {
 
+@media (prefers-color-scheme: dark) {
 	body {
-		background-color: #f2f2f1;
+		background-color: #302d2c;
+		color: #caccc5;
 	}
 
 	h1 {
-		padding-top: 20px;
+		color: #caccc5;
 	}
 
 	a {
-		background-color: #dbe7ce;
-		text-decoration-line: none;
-		color: #2a4635;
+		background-color: #3c4f44;
+		color: #caccc5;
 	}
-}
 
-@media (prefers-color-scheme: dark) {
-	:not(.party-time) {
-		body {
-			background-color: #302d2c;
-			color: #caccc5;
-		}
-
-		h1 {
-			color: #caccc5;
-		}
-
-		a {
-			background-color: #3c4f44;
-			color: #caccc5;
-		}
-
-		body {
-			letter-spacing: 0.55px;
-			line-height: 1.5;
-		}
-	}
 }
 
 .party-time {
-	body {
-		letter-spacing: 0.55px;
-		line-height: 1.5;
-		color: #000000;
-	}
+	letter-spacing: 0.55px;
+	line-height: 1.5;
+	color: #000000;
 
 	h1 {
 		padding-top: 20px;
