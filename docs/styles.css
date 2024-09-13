@@ -41,21 +41,10 @@ a {
 		color: #caccc5;
 	}
 
-}
-
-.party-time {
-	letter-spacing: 0.55px;
-	line-height: 1.5;
-	color: #000000;
-
-	h1 {
-		padding-top: 20px;
-	}
-
-	a {
-		background-color: #dbe7ce;
-		text-decoration-line: none;
-		color: #2a4635;
+	#party-procession {
+		img {
+			filter: invert(88%) sepia(3%) saturate(373%) hue-rotate(36deg) brightness(93%) contrast(93%);
+		}
 	}
 }
 

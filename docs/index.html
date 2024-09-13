@@ -34,10 +34,7 @@
 
 			if (success()) {
 				if (confirm("you have unlocked party mode. will you accept the responsibility?")) {
-					document.body.classList.remove("plain");
 					document.body.classList.add("party-time");
-					document.body.style.backgroundColor = "#f2f2f1";
-					document.body.style.color = "black";
 					for (const el of document.getElementsByClassName('party-exclusive'))
 						el.style.visibility = "visible";
 
@@ -47,7 +44,7 @@
 		});
 
 		// based on https://codepen.io/zachkrall/pen/MWWGMPx
-		var colors = ["#81ac6e", "#dd7e6b", "#bfb23f", "#c73810", "#e74e3c", "#20513e"]
+		var colors = ["#81ac6e", "#dd7e6b", "#bfb23f", "#c73810", "#e74e3c", "#008f57"]
 		function updateText() {
 
 			let delay = 200;
