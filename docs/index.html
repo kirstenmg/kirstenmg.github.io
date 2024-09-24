@@ -16,6 +16,13 @@
 		var keyQueue = [];
 		var keySequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
 
+		var buttonQueue = [];
+		var buttonSequence = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 'be', 'a'];
+
+		function equal(a, b) {
+			return a.length === b.length && a.every((v, i) => v === b[i]);
+		}
+
 		function success() {
 			if (keyQueue.length != keySequence.length) { return false; }
 
@@ -27,6 +34,69 @@
 			return true;
 		}
 
+		function activatePartyMode() {
+			if (confirm("you have unlocked party mode. will you accept the responsibility?")) {
+				document.body.classList.add("party-time");
+				for (const el of document.getElementsByClassName('party-exclusive'))
+					el.style.visibility = "visible";
+
+				updateText();
+			}
+		}
+
+		document.addEventListener('DOMContentLoaded', function () {
+			document.querySelectorAll('.konami').forEach(button => {
+				button.addEventListener('click', function () {
+					buttonQueue.push(button.id);
+					console.log(button.id);
+					if (buttonQueue.length > 10) {
+						buttonQueue.shift();
+					}
+					console.log(buttonQueue);
+
+					if (equal(buttonQueue, buttonSequence)) {
+						activatePartyMode();
+					}
+				});
+			});
+
+			document.getElementById('toggle-mode').addEventListener('click', function () {
+				document.body.classList.toggle("dark");
+				document.body.classList.toggle("light");
+
+			});
+
+			const observer = new MutationObserver(mutations => {
+				mutations.forEach(mutation => {
+					if (mutation.attributeName === 'class') {
+						document.getElementById('light-mode-icon').style.display = document.body.classList.contains("dark") ? "block" : "none";
+						document.getElementById('dark-mode-icon').style.display = document.body.classList.contains("light") ? "block" : "none";
+					}
+				});
+			});
+
+			observer.observe(document.body, { attributes: true });
+
+
+			if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.body.classList.add("dark");
+			} else {
+				document.body.classList.add("light");
+			}
+
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+				if (event.matches) {
+					document.body.classList.add("dark");
+					document.body.classList.remove("light");
+				} else {
+					document.body.classList.add("light");
+					document.body.classList.remove("dark");
+				}
+			});
+
+		});
+
+
 		document.addEventListener('keydown', function (e) {
 			keyQueue.push(e.keyCode);
 			if (keyQueue.length > 10) {
@@ -34,13 +104,7 @@
 			}
 
 			if (success()) {
-				if (confirm("you have unlocked party mode. will you accept the responsibility?")) {
-					document.body.classList.add("party-time");
-					for (const el of document.getElementsByClassName('party-exclusive'))
-						el.style.visibility = "visible";
-
-					updateText();
-				}
+				activatePartyMode();
 			}
 		});
 
@@ -84,6 +148,13 @@
 			an optimizing compiler.
 			In my free time, I enjoy digging in the dirt with <a href="https://sites.uw.edu/seruw/">SER-UW</a>.
 		</p>
+		<p>
+			I <button id="left" class="konami">left</button> Seattle to go <button id="down"
+				class="konami">down</button>
+			to New York this past summer and will
+			<button id="be" class="konami">be</button> returning <button id="right" class="konami">right</button> after
+			I wrap <button id="up" class="konami">up</button> <button id="a" class="konami">a</button> quarter at UW.
+		</p>
 
 		<div id="party-procession">
 			<a href="goose.pdf" style="visibility: hidden; background-color: inherit;" class="party-exclusive marquee">
@@ -94,5 +165,11 @@
 			<img style="visibility: hidden; background-color: inherit; animation-delay: 1.4s;"
 				class="party-exclusive marquee" src="squirrel.svg" height="50px">
 		</div>
+
+		<button class="floating-button" id="toggle-mode">
+			<img id="light-mode-icon" class="icon" src="light_mode.svg" height="40px">
+			<img id="dark-mode-icon" class="icon" src="dark_mode.svg" height="40px">
+		</button>
+
 	</div>
 </body>

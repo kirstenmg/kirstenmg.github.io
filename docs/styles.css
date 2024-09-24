@@ -7,7 +7,6 @@ body {
 	justify-content: center;
 	letter-spacing: 0.55px;
 	line-height: 1.5;
-	background-color: #f2f2f1;
 }
 
 h1 {
@@ -16,8 +15,15 @@ h1 {
 
 a {
 	text-decoration-line: none;
-	background-color: #dbe7ce;
-	color: #2a4635;
+}
+
+.light {
+	background-color: #f2f2f1;
+
+	a {
+		background-color: #dbe7ce;
+		color: #2a4635;
+	}
 }
 
 #main {
@@ -25,12 +31,19 @@ a {
 	max-width: var(--content-width);
 }
 
+.konami {
+	appearance: none;
+	background: none;
+	border: none;
+	color: inherit;
+	font: inherit;
+	padding: 0;
+	cursor: pointer;
+}
 
-@media (prefers-color-scheme: dark) {
-	body {
-		background-color: #302d2c;
-		color: #caccc5;
-	}
+.dark {
+	background-color: #302d2c;
+	color: #caccc5;
 
 	h1 {
 		color: #caccc5;
@@ -93,4 +106,24 @@ a {
 	to {
 		left: 90%;
 	}
+}
+
+.floating-button {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background-color: inherit;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	font-size: 24px;
+	cursor: pointer;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.icon {
+	padding-top: 3px;
+	padding-left: 2px;
 }
