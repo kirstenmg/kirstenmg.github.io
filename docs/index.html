@@ -48,11 +48,9 @@
 			document.querySelectorAll('.konami').forEach(button => {
 				button.addEventListener('click', function () {
 					buttonQueue.push(button.id);
-					console.log(button.id);
 					if (buttonQueue.length > 10) {
 						buttonQueue.shift();
 					}
-					console.log(buttonQueue);
 
 					if (equal(buttonQueue, buttonSequence)) {
 						activatePartyMode();
