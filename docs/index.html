@@ -10,6 +10,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<script src="dark_mode.js"></script>
+
 	<script>
 		console.log('hi :)');
 		console.log('you should put in the konami code');
@@ -34,6 +36,23 @@
 			}
 			return true;
 		}
+
+		document.addEventListener('DOMContentLoaded', function () {
+			document.querySelectorAll('.konami').forEach(button => {
+				button.addEventListener('click', function () {
+					console.log(buttonQueue);
+					buttonQueue.push(button.id);
+					if (buttonQueue.length > 10) {
+						buttonQueue.shift();
+						console.log(buttonQueue);
+					}
+
+					if (equal(buttonQueue, buttonSequence)) {
+						activatePartyMode();
+					}
+				});
+			});
+		});
 
 		function activatePartyMode() {
 			if (confirm("you have unlocked party mode. will you accept the responsibility?")) {
@@ -63,57 +82,6 @@
 				child.style.animationDelay = delay + "s";
 			}
 		}
-
-		document.addEventListener('DOMContentLoaded', function () {
-			document.querySelectorAll('.konami').forEach(button => {
-				button.addEventListener('click', function () {
-					buttonQueue.push(button.id);
-					if (buttonQueue.length > 10) {
-						buttonQueue.shift();
-					}
-
-					if (equal(buttonQueue, buttonSequence)) {
-						activatePartyMode();
-					}
-				});
-			});
-
-			document.getElementById('toggle-mode').addEventListener('click', function () {
-				document.body.classList.toggle("dark");
-				document.body.classList.toggle("light");
-
-			});
-
-			const observer = new MutationObserver(mutations => {
-				mutations.forEach(mutation => {
-					if (mutation.attributeName === 'class') {
-						document.getElementById('light-mode-icon').style.display = document.body.classList.contains("dark") ? "block" : "none";
-						document.getElementById('dark-mode-icon').style.display = document.body.classList.contains("light") ? "block" : "none";
-					}
-				});
-			});
-
-			observer.observe(document.body, { attributes: true });
-
-
-			if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-				document.body.classList.add("dark");
-			} else {
-				document.body.classList.add("light");
-			}
-
-			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-				if (event.matches) {
-					document.body.classList.add("dark");
-					document.body.classList.remove("light");
-				} else {
-					document.body.classList.add("light");
-					document.body.classList.remove("dark");
-				}
-			});
-
-		});
-
 
 		document.addEventListener('keydown', function (e) {
 			keyQueue.push(e.keyCode);
@@ -155,23 +123,27 @@
 
 <body>
 	<div id="main">
-		<h1 id="animated">Kirsten Graham</h1>
+		<h1 id="animated">Kirsten</h1>
 		<p><i>she/her/hers</i></p>
-		<p style="font-size: 1.2em;"><b>M.S. Computer Science, University of Washington</b></p>
 
 		<p>
-			I am a Master's student at the University of Washington studying computer science, with an interest in
-			database systems and compilers.
-			My current research, at <a href="https://uwplse.org/">UW PLSE</a>, is on using equality saturation to
-			build
-			an optimizing compiler.
-			In my free time, I enjoy digging in the dirt with <a href="https://sites.uw.edu/seruw/">SER-UW</a>.
+			I am an avid enjoyer of doing little crafts, reading books on the subway, and walking around looking at
+			stuff. Here is <a href="photos.html">some stuff I have looked at</a>.
+		</p>
+
+		<p>
+			I recently <button id="left" class="konami">left</button> Seattle <button id="right"
+				class="konami">right</button> after wrapping <button id="up" class="konami">up</button>
+			<button id="a" class="konami">a</button> computer science degree at the University of Washington. During my
+			time at UW, I helped build an optimizing
+			compiler using equality saturation at <a href="https://uwplse.org/">UW PLSE</a>. While not at the
+			computer, I was happy to <button id="be" class="konami">be</button> digging in the dirt <button id="down"
+				class="konami">down</button> at Yesler
+			Swamp with <a href="https://sites.uw.edu/seruw/">SER-UW</a>.
 		</p>
 		<p>
-			I <button id="left" class="konami">left</button> Seattle to go <button id="down"
-				class="konami">down</button>
 			to New York this past summer and will
-			<button id="be" class="konami">be</button> returning <button id="right" class="konami">right</button>
+			<button id="be" class="konami">be</button> returning
 			after
 			I wrap <button id="up" class="konami">up</button> <button id="a" class="konami">a</button> quarter at
 			UW.
