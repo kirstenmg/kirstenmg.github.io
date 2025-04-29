@@ -38,10 +38,29 @@
 		function activatePartyMode() {
 			if (confirm("you have unlocked party mode. will you accept the responsibility?")) {
 				document.body.classList.add("party-time");
-				for (const el of document.getElementsByClassName('party-exclusive'))
-					el.style.visibility = "visible";
+				for (const el of document.getElementsByClassName('party-exclusive')) { el.style.visibility = "visible"; process(); }
 
 				updateText();
+			}
+		}
+
+		function process() {
+			const partyProcession = document.getElementById('party-procession');
+			// for each child of partyprocession, set the animation delay based on the speed and the width of the screen
+			const screenWidth = document.getElementById("main").offsetWidth;
+			const animationDuration = 7;
+			const animationRate = animationDuration / screenWidth;
+			console.log(screenWidth);
+			console.log(animationRate);
+			const childWidth = partyProcession.children[0].offsetWidth;
+			console.log(childWidth);
+
+			var delay = 0;
+			for (let i = 0; i < partyProcession.children.length; i++) {
+				const child = partyProcession.children[i];
+				delay = delay + 1.5 * childWidth * animationRate;
+				console.log(delay);
+				child.style.animationDelay = delay + "s";
 			}
 		}
 
@@ -162,10 +181,10 @@
 			<a href="goose.pdf" style="visibility: hidden; background-color: inherit;" class="party-exclusive marquee">
 				<img src="goose.svg" height="50px">
 			</a>
-			<img style="visibility: hidden; background-color: inherit; animation-delay: 0.7s;"
-				class="party-exclusive marquee" src="turtle.svg" height="50px">
-			<img style="visibility: hidden; background-color: inherit; animation-delay: 1.4s;"
-				class="party-exclusive marquee" src="squirrel.svg" height="50px">
+			<img style="visibility: hidden; background-color: inherit" class="party-exclusive marquee" src="turtle.svg"
+				height="50px">
+			<img style="visibility: hidden; background-color: inherit" class="party-exclusive marquee"
+				src="squirrel.svg" height="50px">
 		</div>
 
 		<button class="floating-button" id="toggle-mode">
