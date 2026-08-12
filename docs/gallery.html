@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <style>
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gallery" id="gallery"></div>
+
+    <script>
+        const images = [
+            ["../scrolling_photos/devils_club_canopy.jpg", "a canopy of devil's club plants"],
+            ["../scrolling_photos/devils_club.jpg", "devil's club plants"],
+            ["../scrolling_photos/ferns.jpg", "ferns in a pacific northwest forest"],
+            ["../scrolling_photos/fluffy_flowers_yellow.jpg", "a bunch of tiny fluffy cream-colored flowers"],
+            ["../scrolling_photos/greenlake.jpg", "greenlake on a clear day. the lifeguard is off-duty."],
+            ["../scrolling_photos/puffy_flowers.jpg", "a fluffy bunch of tiny flowers"],
+            ["../scrolling_photos/ravenna_bridge.jpg", "overhead view of woods"]
+        ];
+
+        function selectImageByDate() {
+            let today = new Date();
+            const day = (today.getFullYear() + today.getMonth() + today.getDate())
+            return images[(day + 4) % images.length];
+        }
+
+        function renderGallery() {
+            const gallery = document.getElementById('gallery');
+            const selectedImage = selectImageByDate();
+            const src = selectedImage[0];
+            const alt = selectedImage[1];
+            console.log(selectedImage);
+
+            document.documentElement.style.backgroundImage = "url(" + src + ")";
+
+
+            const imgElement = document.createElement('img');
+            imgElement.id = "gallery-image";
+            imgElement.src = src;
+            imgElement.alt = alt;
+
+        }
+
+        renderGallery();
+    </script>
+
+    <style>
+        #gallery-image {
+            object-fit: cover;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .bug {
+            position: absolute;
+            bottom: 100%;
+            left: 0%;
+            width: 50px;
+            height: 50px;
+            background-image: url('../scrolling_photos/ferns.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: wiggle 10s infinite;
+        }
+
+        /* TODO: add randomization */
+        @keyframes wiggle {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            12.5% {
+                transform: translate(0, 25vh);
+            }
+
+            20% {
+                transform: translate(0, 30vh);
+            }
+
+            22% {
+                transform: translate(0, 50vh);
+            }
+
+            28% {
+                transform: translate(0, 70vh);
+            }
+
+            33% {
+                transform: translate(0, 100vh);
+            }
+
+            37.5% {
+                transform: translate(calc(25vw - 50px), -100vh);
+            }
+
+            50% {
+                transform: translate(calc(50vw - 50px), -100vh);
+            }
+
+            62.5% {
+                transform: translate(calc(50vw - 50px), -50vh);
+            }
+
+            75% {
+                transform: translate(calc(50vw - 50px), 0);
+            }
+
+            87.5% {
+                transform: translate(calc(25vw - 50px), 0);
+            }
+
+            100% {
+                transform: translate(-50%, 0);
+            }
+        }
+
+        html {
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+    </style>
+
+    <div class="bug"></div>
+</body>
+
+</html
